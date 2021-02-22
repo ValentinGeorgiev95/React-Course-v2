@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Modal from '../../components/UI/Modal/Modal';
 import Auxiliate from "../Auxiliate/Auxiliate";
 
@@ -7,20 +7,28 @@ const withErrorHandler = (WrappedComponent, axios) => {
         state = {
             error: null
         }
-        componentDidMount = () => {
-            axios.interceptors.response.use(null, error => {
-                this.setState({
-                    error: error,
-                })
-            }
+        componentWillMount() {
+            axios.interceptors.request.use(req => {
+                this.setState({ error: null });
+                return req;
+            });
+            axios.interceptors.response.use(res => res, error => {
+                this.setState({ error: error });
+            });
+        }
+
+        errorConfirmedHandler = () => {
+            this.setState({ error: null });
         }
         render() {
             return (
                 <Auxiliate>
-                    <Modal show={}>
-                        Something didn't work!
+                    <Modal
+                        show={this.state.error}
+                        modalClosed={this.errorConfirmedHandler}>
+                        {this.state.error ? this.state.error.message : null}
                     </Modal>
-                    <WrappedComponent {...props} />
+                    <WrappedComponent {...this.props} />
                 </Auxiliate>
             )
         }

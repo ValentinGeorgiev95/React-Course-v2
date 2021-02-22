@@ -1,18 +1,19 @@
 import React from 'react';
-import Auxiliate from "../../../hoc/Auxiliate/Auxiliate";
+
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
+import Auxiliate from '../../../hoc/Auxiliate/Auxiliate';
 
-const sideDrawer = ( props ) => {
+const sideDrawer = (props) => {
     let attachedClasses = [classes.SideDrawer, classes.Close];
     if (props.open) {
         attachedClasses = [classes.SideDrawer, classes.Open];
     }
     return (
         <Auxiliate>
-            <Backdrop show={props.open} clicked={props.closed}/>
+            <Backdrop show={props.open} clicked={props.closed} />
             <div className={attachedClasses.join(' ')}>
                 <div className={classes.Logo}>
                     <Logo />

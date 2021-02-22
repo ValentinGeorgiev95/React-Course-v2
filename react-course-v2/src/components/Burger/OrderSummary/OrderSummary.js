@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Auxiliate from "../../../hoc/Auxiliate/Auxiliate";
+
+import Auxiliate from '../../../hoc/Auxiliate/Auxiliate';
 import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
@@ -8,14 +9,14 @@ class OrderSummary extends Component {
         console.log('[OrderSummary] WillUpdate');
     }
 
-    render () {
-        const ingredientSummary = Object.keys( this.props.ingredients )
-            .map( igKey => {
+    render() {
+        const ingredientSummary = Object.keys(this.props.ingredients)
+            .map(igKey => {
                 return (
                     <li key={igKey}>
                         <span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {this.props.ingredients[igKey]}
-                    </li> );
-            } );
+                    </li>);
+            });
 
         return (
             <Auxiliate>
